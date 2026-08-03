@@ -11,7 +11,7 @@ int main()
 	while(1)
 	{
 		std::cout << "Enter command: ";
-		if(!(std::cin >> command))
+		if(!(std::getline(std::cin, command)))
 			break;
 		if (command == "ADD")
 			phoneBook.addContact();

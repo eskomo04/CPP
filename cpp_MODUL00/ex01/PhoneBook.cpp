@@ -5,6 +5,22 @@ PhoneBook::PhoneBook(){
 }
 PhoneBook::~PhoneBook(){};
 
+static std::string validateInput(const std::string fieldName)
+{
+	std::string input;
+	while(1)
+	{
+		std::cout << "Enter " << fieldName << ": ";
+		std::getline(std::cin, input);
+		if (input.empty())
+		{
+			std::cout << fieldName << " cannot be empty. Please try again." << std::endl;
+		}
+		else
+			return input;
+	}
+}
+
 void PhoneBook::addContact()
 {
 	std::string firstName;
@@ -13,20 +29,11 @@ void PhoneBook::addContact()
 	std::string phoneNumber;
 	std::string darkestSecret;
 
-	std::cout << "Enter first name: ";
-	std::getline(std::cin, firstName);
-
-	std::cout << "Enter last name: ";
-	std::getline(std::cin, lastName);
-
-	std::cout << "Enter nickname: ";
-	std::getline(std::cin, nickName);
-
-	std::cout << "Enter phone number: ";
-	std::getline(std::cin, phoneNumber);
-
-	std::cout << "Enter darkest secret: ";
-	std::getline(std::cin, darkestSecret);
+	firstName = validateInput("firstname");
+	lastName = validateInput("lastname");
+	nickName = validateInput("nickname");
+	phoneNumber = validateInput("phone number");
+	darkestSecret = validateInput("darkest secret");
 
 	_contacts[_contactCount % 4].setFirstName(firstName);
 	_contacts[_contactCount % 4].setLastName(lastName);
