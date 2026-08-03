@@ -5,6 +5,19 @@ PhoneBook::PhoneBook(){
 }
 PhoneBook::~PhoneBook(){};
 
+static int isOnlySpaces(const std::string &input)
+{
+	size_t i;
+	i = 0;
+	while (i < input.length())
+	{
+		if (!isspace(input[i]))
+			return 1;
+		i++;
+	}
+	return 0;
+}
+
 static std::string validateInput(const std::string fieldName)
 {
 	std::string input;
@@ -12,7 +25,7 @@ static std::string validateInput(const std::string fieldName)
 	{
 		std::cout << "Enter " << fieldName << ": ";
 		std::getline(std::cin, input);
-		if (input.empty())
+		if (input.empty() || !isOnlySpaces(input))
 		{
 			std::cout << fieldName << " cannot be empty. Please try again." << std::endl;
 		}
@@ -35,11 +48,11 @@ void PhoneBook::addContact()
 	phoneNumber = validateInput("phone number");
 	darkestSecret = validateInput("darkest secret");
 
-	_contacts[_contactCount % 4].setFirstName(firstName);
-	_contacts[_contactCount % 4].setLastName(lastName);
-	_contacts[_contactCount % 4].setNickName(nickName);
-	_contacts[_contactCount % 4].setPhoneNumber(phoneNumber);
-	_contacts[_contactCount % 4].setDarkestSecret(darkestSecret);
+	_contacts[_contactCount % 8].setFirstName(firstName);
+	_contacts[_contactCount % 8].setLastName(lastName);
+	_contacts[_contactCount % 8].setNickName(nickName);
+	_contacts[_contactCount % 8].setPhoneNumber(phoneNumber);
+	_contacts[_contactCount % 8].setDarkestSecret(darkestSecret);
 
 	_contactCount++;
 }
@@ -49,7 +62,7 @@ void PhoneBook::searchContacts()
 	int i;
 
 	i = 0;
-	while(i < _contactCount && i < 4)
+	while(i < _contactCount && i < 8)
 	{
 		std::cout << _contacts[i].getFirstName() << std::endl;
 		std::cout << _contacts[i].getLastName() << std::endl;
