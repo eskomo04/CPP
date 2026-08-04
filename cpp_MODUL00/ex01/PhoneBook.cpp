@@ -1,4 +1,6 @@
 #include "PhoneBook.hpp"
+#include <iomanip>
+#include <string>
 
 PhoneBook::PhoneBook(){
 	_contactCount = 0;
@@ -56,20 +58,57 @@ void PhoneBook::addContact()
 
 	_contactCount++;
 }
-
+void	print_truncatedStr(std::string str)
+{
+	if(str.length() > 10)
+	{
+		str = str.substr(0, 9) + ".";
+	}
+	std::cout << std::setw(10) << str;
+}
 void PhoneBook::searchContacts()
 {
+	if(_contactCount == 0)
+	{
+		std::cout << "PhoneBook is empty!" << std::endl;
+		return ;
+	}
+	std::cout	<< std::setw(10) << "index" << "|"
+				<< std::setw(10) << "first name" << "|"
+				<< std::setw(10) << "last name" << "|"
+				<< std::setw(10) << "nickname" << std::endl;
+
+	for(int i = 0; i < _contactCount && i < 8; i++)
+	{
+		std::cout << std::setw(10) << i << "|";
+		print_truncatedStr(_contacts[i].getFirstName());
+		std::cout << "|";
+		print_truncatedStr(_contacts[i].getLastName());
+		std::cout << "|";
+		print_truncatedStr(_contacts[i].getNickName());
+		std::cout << std::endl;
+	}
+/////////////////////////////////////////
+	std::string index;
 	int i;
 
 	i = 0;
-	while(i < _contactCount && i < 8)
+	std::cout << "Which Contact-index to display? : ";
+	std::getline(std::cin, index);
+	if(index.length() == 1 && index[0] >= '0' && index[0] <= '7')
 	{
-		std::cout << _contacts[i].getFirstName() << std::endl;
-		std::cout << _contacts[i].getLastName() << std::endl;
-		std::cout << _contacts[i].getNickName() << std::endl;
-		std::cout << _contacts[i].getPhoneNumber() << std::endl;
-		std::cout << _contacts[i].getDarkestSecret() << std::endl << std::endl;
-		i++;
-
+		i = index[0] - '0';
+		if(i < _contactCount)
+		{
+			std::cout << "First name: " << _contacts[i].getFirstName() << std::endl;
+			std::cout << "Last name: " << _contacts[i].getLastName() << std::endl;
+			std::cout << "Nickname: " << _contacts[i].getNickName() << std::endl;
+			std::cout << "Phonenumber: " << _contacts[i].getPhoneNumber() << std::endl;
+			std::cout << "Darkest secret: " << _contacts[i].getDarkestSecret() << std::endl;
+		}
+		else
+			std::cout << "Invalide Index!" << std::endl;
 	}
+	else
+		std::cout << "Invalide Index!" << std::endl;
 }

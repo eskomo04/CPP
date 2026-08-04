@@ -19,8 +19,6 @@ int main()
 			phoneBook.searchContacts();
 		else if (command == "EXIT")
 			break;
-		else
-			std::cout << "Invalid command. Type only: 'ADD', 'SEARCH', 'EXIT'." << std::endl;
 	}
 	return 0;
 }
