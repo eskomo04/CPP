@@ -1,12 +1,13 @@
 #include "PhoneBook.hpp"
 #include <string>
+#include <iostream>
 
 int main()
 {
 	PhoneBook phoneBook;
 	std::string command;
 
-	std::cout << "Welcome to the PhoneBook application!:|" << std::endl;
+	std::cout << "Welcome to the PhoneBook application!:)" << std::endl;
 	std::cout << "Useable commands are: ADD, SEARCH, EXIT" << std::endl;
 	while(1)
 	{

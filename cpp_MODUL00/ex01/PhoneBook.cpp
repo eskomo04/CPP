@@ -1,5 +1,6 @@
 #include "PhoneBook.hpp"
 #include <iomanip>
+#include <cctype>
 #include <string>
 
 PhoneBook::PhoneBook(){
@@ -64,7 +65,7 @@ void	print_truncatedStr(std::string str)
 	{
 		str = str.substr(0, 9) + ".";
 	}
-	std::cout << std::setw(10) << str;
+	std::cout << std::right << std::setw(10) << str;
 }
 void PhoneBook::searchContacts()
 {
@@ -73,7 +74,8 @@ void PhoneBook::searchContacts()
 		std::cout << "PhoneBook is empty!" << std::endl;
 		return ;
 	}
-	std::cout	<< std::setw(10) << "index" << "|"
+
+	std::cout << std::right	<< std::setw(10) << "index" << "|"
 				<< std::setw(10) << "first name" << "|"
 				<< std::setw(10) << "last name" << "|"
 				<< std::setw(10) << "nickname" << std::endl;
