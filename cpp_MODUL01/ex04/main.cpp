@@ -11,7 +11,6 @@ int main(int argc, char **argv)
 		std::cout << "Wrong count of arguments!" << std::endl;
 		return 1;
 	}
-	std::string filename(argv[1]);
 	std::string s1(argv[2]);
 	std::string s2(argv[3]);
 
@@ -22,20 +21,39 @@ int main(int argc, char **argv)
 	}
 
 	std::fstream myFile;
-	
+	std::string contant;
 
 	myFile.open(argv[1], std::ios::in);
 	if(myFile.is_open())
 	{
 		std::stringstream buffer;
 		buffer << myFile.rdbuf();
-		std::string contant = buffer.str();
+		contant = buffer.str();
 
 		//std::cout << contant;
 		myFile.close();
 	}
 
+	size_t found = 0;
+	size_t pos = 0;
+	std::string result;
 
+	while(1)
+	{
+		found = contant.find(s1, pos);
+		if (found != std::string::npos)
+		{
+			result.append(contant, pos,  found - pos);
+			result += s2;
+			pos = found + s1.length();
+		}
+		else
+		{
+			result.append(contant, pos, contant.length() - pos);
+			break ;
+		}
+	}
+	std::cout << result << std::endl;
 
 	return 0;
 }
