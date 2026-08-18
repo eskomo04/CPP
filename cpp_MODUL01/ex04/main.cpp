@@ -53,7 +53,19 @@ int main(int argc, char **argv)
 			break ;
 		}
 	}
-	std::cout << result << std::endl;
 
+	std::string replaceFileName = std::string(argv[1]) + ".replace";
+	std::ofstream replaceFile(replaceFileName.c_str());
+
+	if(replaceFile.is_open())
+	{
+		replaceFile << result;
+		replaceFile.close();
+	}
+	else
+	{
+		std::cout << "Couldn't open replace file!" << std::endl;
+		return 1;
+	}
 	return 0;
 }
