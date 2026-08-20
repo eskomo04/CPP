@@ -29,8 +29,6 @@ int main(int argc, char **argv)
 		std::stringstream buffer;
 		buffer << myFile.rdbuf();
 		contant = buffer.str();
-
-		//std::cout << contant;
 		myFile.close();
 	}
 
