@@ -29,7 +29,7 @@ void Harl::error(void)
 
 void Harl::complain(std::string level)
 {
-	std::string levels[4] = { "DEBUG", "INFO", "WARNING", "ERROR"};
+	std::string levels[4] = { "DEBUG", "WARNING", "INFO", "ERROR"};
 	void (Harl:: *ptrFuncMem[4])() = { &Harl::debug, &Harl::warning, &Harl::info, &Harl::error};
 
 	int i = 0;
@@ -40,5 +40,6 @@ void Harl::complain(std::string level)
 			(this->*ptrFuncMem[i])();
 			return ;
 		}
+		i++;
 	}
 }
